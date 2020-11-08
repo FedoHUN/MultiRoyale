@@ -17,21 +17,23 @@ public class FPSJump : NetworkBehaviour
 
     void Update()
     {
-        bool IsOnGround() 
-        {
-            Collider[] colliders = Physics.OverlapSphere(groundChecker.position, checkRadius, groundLayer);
-            if (colliders.Length > 0) 
+        if(isLocalPlayer){
+            bool IsOnGround() 
             {
-                return true;
-            }else 
-            {
-                return false;
+                Collider[] colliders = Physics.OverlapSphere(groundChecker.position, checkRadius, groundLayer);
+                if (colliders.Length > 0) 
+                {
+                    return true;
+                }else 
+                {
+                    return false;
+                }
             }
-        }
 
-    if (Input.GetKeyDown(KeyCode.Space) && IsOnGround()) 
-    {
-        rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-    }
+        if (Input.GetKeyDown(KeyCode.Space) && IsOnGround()) 
+        {
+            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        }
+        }
     }
 }

@@ -11,20 +11,24 @@ public class FPSMovement : NetworkBehaviour
 
     void Start() {
         rb = GetComponent<Rigidbody>();
+
+        if(!isLocalPlayer) gameObject.layer = 11;
     }
 
-    void Update() {
-        float x = Input.GetAxisRaw("Horizontal");
-        float z = Input.GetAxisRaw("Vertical");
+    void Update() 
+    {
+        if(isLocalPlayer){
+            float x = Input.GetAxisRaw("Horizontal");
+            float z = Input.GetAxisRaw("Vertical");
 
-        Vector3 moveBy = transform.right * x + transform.forward * z;
+            Vector3 moveBy = transform.right * x + transform.forward * z;
 
-        float actualSpeed = speed;
-        if (Input.GetKey(KeyCode.LeftShift)) {
-            actualSpeed *= sprintMultiplier;
+            float actualSpeed = speed;
+            if (Input.GetKey(KeyCode.LeftShift)) {
+                actualSpeed *= sprintMultiplier;
+            }
+
+            rb.MovePosition(transform.position + moveBy.normalized * actualSpeed * Time.deltaTime);
         }
-
-        rb.MovePosition(transform.position + moveBy.normalized * actualSpeed * Time.deltaTime);
     }
-
 }

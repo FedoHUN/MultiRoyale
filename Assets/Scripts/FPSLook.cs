@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 
-public class FPSLook : NetworkBehaviour
+public class FPSLook : MonoBehaviour
 {
     [SerializeField] Transform cam;
     [SerializeField] float sensitivity;
